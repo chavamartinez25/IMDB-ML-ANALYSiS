@@ -8,10 +8,10 @@ FROM
 (
     SELECT 
       m1.movie_year,
-      SUM(m1.movie_rating) AS total_votes
+    SUM(m1.movie_votings) AS total_votes
     FROM imdb.top_250_movies AS m1
-    FULL JOIN imdb.most_popular_movies AS m2 ON ( m1.movie_name = m2.movie_name )
-    FULL JOIN imdb.top_english_movies AS m3 ON ( m1.movie_name = m3.movie_name )
+    LEFT JOIN imdb.most_popular_movies AS m2 ON ( m1.movie_name = m2.movie_name )
+    LEFT JOIN imdb.top_english_movies AS m3 ON ( m1.movie_name = m3.movie_name )
     GROUP BY
       m1.movie_year
 ) AS aaa
